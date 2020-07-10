@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="{%  static "css/base.css" %}"/>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <title>Base</title>
+    </head>
+    <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <div class="container">
+
+        <ul class="navbar-nav mr-auto">
+            <li><a class="navbar-brand" href="{% url 'index' %}">
+            <img src="{% static 'images/film.png' %}" class="img" width=6% alt=""><span>Binge-a-lot!</span></a></li>
+            <li><a class="nav-link" href="{% url 'movie_search:register' %}">Register</a></li>
+
+            {% if user.is_authenticated %}
+
+            <li><a class="nav-link" href="{% url "logout" %}">Logout</a></li>
+                <li><a class="nav-link" href="{% url "movie_search:input_genre" %}">Search by genre</a></li>
+                <li><a class="nav-link">Logged in as: {{ user }}</a></li>
+
+            {% else %}
+
+            <li><a class="nav-link" href="{% url "movie_search:user_login" %}">Login</a></li>
+
+            {% endif %}
+        </ul>
+    </div>
+
+</nav>
+<div class="container">
+
+{% block body_block %}
+{% endblock %}
+</div>
+</body>
+</html>

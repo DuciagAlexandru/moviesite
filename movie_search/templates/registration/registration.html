@@ -1,0 +1,41 @@
+{% extends "registration/base.html" %}
+{% load crispy_forms_filters %}
+{% load static %}
+{% block body_block %}
+
+<link rel="stylesheet" href={% static "css/registration.css" %}/>
+
+    <div class="jumbotron">
+
+    {% if registered %}
+
+        <h1>Thank you for registering!</h1>
+
+        {% else %}
+
+        <form method="POST">
+
+        {% csrf_token %}
+
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Register here!</legend>
+            {{ user_form|crispy }}
+        </fieldset>
+
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign up</button>
+            </div>
+        </form>
+
+        <div class="border-top pt-3">
+
+        <small class="text-muted">
+            Already have an account? <a href="{% url "movie_search:user_login" %}">Sign in</a>
+        </small>
+
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}
+
+

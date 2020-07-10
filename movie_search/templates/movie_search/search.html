@@ -1,0 +1,41 @@
+{% extends "registration/base.html" %}
+{% block body_block %}
+    {% load static %}
+
+    <link rel="stylesheet" href={% static "css/search.css" %}/>
+
+    <br>
+
+<h1 align="center">Please input the movie genre and search limit</h1>
+
+<form class="form-inline" action="{% url "movie_search:search_result" %}">
+
+<div class="container" align="center">
+
+    <br>
+
+        <input id="movie_search" class="form-control mr-sm-2" type="search" placeholder="Search by genre" aria-label="Search" name="user_input">
+    <br>
+    <br>
+        <input id="number_search" class="form-control mr-sm-2" type="search" placeholder="Number of examples" aria-label="Search" name="search_numbers">
+    <br>
+    <br>
+<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button id="info" type="button" class="btn btn-outline-info">Info</button>
+    <br>
+    <br>
+    <div id="popup" class="alert alert-info" role="alert" style="display: none"><p>Tip No. 1: use simple movie genres like comedy, horror, action, sci-fi, manele, romance, etc.</p>
+
+        <p>Tip No. 2: as this site is using an api with limited quota, please try to reduce the search limit to under 50, like reeaaally under 50 :)</p>
+
+        <p>Tip No. 3: if by any chance the site will result in a 404 Error, you probably either broke the Internet or maybe the Youtube API reached the limited quota. Try again in 24H.</p>
+
+    </div>
+</div>
+<script src="{% static "js/search.js" %}"></script>
+</form>
+{% endblock %}
+
+
+
+

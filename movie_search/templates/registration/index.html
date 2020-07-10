@@ -1,0 +1,39 @@
+{% extends "registration/base.html" %}
+{% block body_block %}
+    <body>
+    {% load static %}
+
+    {% if messages %}
+
+    {% for message in messages %}
+
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+        </div>
+
+    {% endfor %}
+    {% endif %}
+
+    <link rel="stylesheet" href={% static "css/index.css" %}/>
+
+<div class="jumbotron">
+
+    <h1>Greetings {{ user }}!</h1>
+    <br>
+
+<p>Thank you for visiting this little site.</p>
+
+<p>With this application you use movies genres in order to search for a list of movies based on popularity from IMDB.
+    You input a number to limit the search results and
+    watch a movie trailer for each result. However, before you can start using the search engine you will have to
+    <strong>register</strong> your account. Then you will have to <strong>log in</strong> with your credentials after
+    which you can use the <strong>Search by genre</strong> function located in the upper right corner.</p>
+
+    <p>This project was made using the BeautifulSoup plugin in order to scrape some data from IMDB and
+        the Youtube API v3 in order to return movie trailers based on the movies resulted from your genre search.
+        Also this website is powered by Django!</p>
+
+    <p>So, let's try it out! :)</p>
+</div>
+    </body>
+{% endblock %}

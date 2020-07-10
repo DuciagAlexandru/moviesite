@@ -1,0 +1,61 @@
+{% extends "registration/base.html" %}
+{% block body_block %}
+    {% load static %}
+
+    <link rel="stylesheet" href={% static "css/movie.css" %}/>
+
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <div class="loader-wrapper">
+    <span class="loader"><span class="loader-inner"></span></span>
+</div>
+
+<script>
+    $(window).on("load",function(){
+     $(".loader-wrapper").fadeOut("slow");
+});
+</script>
+
+    <script src="{% static "/parallax.js-1.5.0/parallax.js" %}"></script>
+        <div class="parallax-window" data-parallax="scroll" data-image-src="{% static "images/cinema_back.jpg" %}">
+
+{% for headline_list, summary_list, launch_date_list, movie_duration_modified_list, rating_list_modified, director_list, star1_list, star2_list, star3_list, image_list_modified, movtrailer_ready_list in container %}
+    <br>
+    <br>
+
+    <div class="parallax-window" data-parallax="scroll" data-image-src="{% static "images/cinema_back.jpg" %}">
+    <div class="border border-info shadow-lg p-3 mb-5 bg-white rounded">
+
+   <table>
+
+  <tr>
+    <th colspan="2"><h3>{{ headline_list }}</h3></th>
+  </tr>
+
+  <tr>
+    <td><img src="{{ image_list_modified }}" alt="Just imagine a movie poster of some sorts"></td>
+    <td><p><strong>Summary</strong>:{{ summary_list }}</p>
+        <p><strong>Launched</strong>: {{ launch_date_list }}
+        <strong>Duration</strong>: {{ movie_duration_modified_list }}
+        <strong>Rating score</strong>: {{ rating_list_modified }}</p>
+    </td>
+
+  </tr>
+    </table>
+
+    <p><strong>Director</strong>: {{ director_list }}
+    <strong>Stars</strong>: {{ star1_list }}, {{ star2_list }}, {{ star3_list }}</p>
+
+    <p><strong>Trailer:</strong></p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ movtrailer_ready_list }}" frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+</div>
+</div>
+
+
+
+{% endfor %}
+
+
+{% endblock %}
