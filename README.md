@@ -7,4 +7,4 @@ For the backend I used Python/Django and for the frontend I used HTML, CSS, Java
 
 Edit:
 You will need to add a Youtube API key code into the views.py app_key in order to make the search function work properly.
-If you require just
+
