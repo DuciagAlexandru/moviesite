@@ -1,0 +1,37 @@
+{% extends "account/base.html" %}
+{% block body_block %}
+    {% load crispy_forms_filters %}
+    {% load static %}
+<link rel="stylesheet" href="{%  static "css/login.css" %}"/>
+
+<div class="jumbotron">
+
+    <h1 align="center">Please Login</h1>
+
+    <form action="{% url "movie_search:user_login" %}" method="POST">
+        <div class="form-group">
+
+        {% csrf_token %}
+
+        <label for="username">Username:</label>
+        <input class="form-control" type="text" name="username" placeholder="Enter username">
+
+        <label for="password">Password:</label>
+        <input class="form-control" type="password" name="password">
+
+        </br>
+
+        <input type="submit" class="btn btn-primary" value="Log in">
+            </div>
+
+        {% for message in messages %}
+
+    <div class="alert alert-{{ message.tags }}">
+        {{ message }}
+        </div>
+
+
+    {% endfor %}
+    </form>
+</div>
+{% endblock %}

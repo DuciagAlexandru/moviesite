@@ -1,7 +1,9 @@
-var one=document.querySelector("bleh")
-var two=document.querySelector("number_search")
+var info=document.querySelector("#info")
 
-one.addEventListener("mouseover", function(){
-	one.textContent = "Mouse Currently";
-})
+info.onmouseover = function() {
+  document.getElementById('popup').style.display = 'block';
+}
 
+info.onmouseout = function() {
+  document.getElementById('popup').style.display = 'none';
+}

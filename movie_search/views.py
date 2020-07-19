@@ -5,33 +5,39 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from googleapiclient.discovery import build
 from django.contrib.auth.decorators import login_required
-from movie_search.forms import UserRegisterForm
+from .forms import CreateUserForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
-
 # The homepage
 def index(request):
-    return render(request, "registration/index.html")
+    return render(request, "account/index.html")
 
 
 # Registration page
 def register(request):
+
     registered = False
+    form = CreateUserForm()
+
     if request.method == "POST":
-        user_form = UserRegisterForm(request.POST)
-        if user_form.is_valid():
-            user_form.save()
-            username = user_form.cleaned_data.get("username")
-            messages.success(request, f"Account created for {username}! Now you can use the search function!")
+
+        form = CreateUserForm(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+            username = form.cleaned_data.get("username")
+            messages.success(request, f"Account was created for {username}! Now you can use the search function!")
             return redirect("index")
 
     else:
-        user_form = UserRegisterForm()
 
-    return render(request, "registration/registration.html",
-                  {"user_form": user_form, "registered": registered})
+        form = CreateUserForm()
+
+    return render(request, "account/registration.html",
+                  {"form": form, "registered": registered})
 
 
 # Logout with the added decorator so that only logged users can access the logout option
@@ -43,25 +49,27 @@ def user_logout(request):
 
 # Login page
 def user_login(request):
+
     if request.method == "POST":
+
         username = request.POST.get("username")
         password = request.POST.get("password")
 
-        user = authenticate(username=username, password=password)
+        user = authenticate(request, username=username, password=password)
 
-        if user:
-            if user.is_active:
-                login(request, user)
-                return HttpResponseRedirect(reverse("index"))
-            else:
-                return HttpResponse("Account is not active!")
+        if user is not None:
+            login(request, user)
+            return redirect("index")
+        else:
+            messages.info(request, "Username or password is incorrect!")
+            return render(request, "account/login.html", {})
     else:
-        return render(request, "registration/login.html", {})
+        return render(request, "account/login.html", {})
 
 
 # The search algorithm made out of BeautifulSoup and Youtube API
 def search_result(request):
-    api_key = ""
+    api_key = "AIzaSyCfhbTthwHuEkZAR-Z4kl1zsqmPHFu31Xg"
 
     # Adding the Youtube Api to a variable
     youtube = build("youtube", "v3", developerKey=api_key)
