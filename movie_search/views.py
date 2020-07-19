@@ -70,7 +70,7 @@ def user_login(request):
 # The search algorithm made out of BeautifulSoup and Youtube API
 @login_required
 def search_result(request):
-    api_key = "AIzaSyCfhbTthwHuEkZAR-Z4kl1zsqmPHFu31Xg"
+    api_key = ""
 
     # Adding the Youtube Api to a variable
     youtube = build("youtube", "v3", developerKey=api_key)
