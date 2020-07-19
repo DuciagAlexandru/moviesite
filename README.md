@@ -9,4 +9,4 @@ Edit:
 You will need to add a Youtube API key code into the views.py app_key in order to make the search function work properly.
 
 Edit 2:
-You will probably need to make some migrations first in order to register/login a new account.
+You will need to create a database first (db.sqlite3) by making some migrations first in order to register/login a new account.
