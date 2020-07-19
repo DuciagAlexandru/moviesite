@@ -68,6 +68,7 @@ def user_login(request):
 
 
 # The search algorithm made out of BeautifulSoup and Youtube API
+@login_required
 def search_result(request):
     api_key = "AIzaSyCfhbTthwHuEkZAR-Z4kl1zsqmPHFu31Xg"
 
